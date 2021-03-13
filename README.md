@@ -1,5 +1,4 @@
 # printf
-# printf
 
 ### Low-level programming & Algorithms
 
