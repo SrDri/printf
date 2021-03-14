@@ -39,3 +39,13 @@ int print_s(va_list print)
 
 	return (i);
 }
+/**
+ * Percent_sign - print a percent a percent sign
+ * @print: list of arguments
+ * Return: expected a variable to be unused
+ */
+int Percent_sign(__attribute__((unused)) va_list print)
+{
+	_putchar(37);
+	return (1);
+}
