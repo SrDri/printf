@@ -1,0 +1,46 @@
+.TH _PRINTF 1 "15 March 2021" "1" "_printf() Manual"
+
+.SH NAME
+.B _printf()
+
+The _printf function recreates printf() form stdio.
+
+.SH SYNOPSIS
+.B #include "holberton.h"
+
+.B int _printf(const char \fI*format\fR,
+.B ...)
+
+.YS
+
+.SH DESCRIPTION
+.B _printf()
+Print ARGUMENT(s) according to FORMAT, or execute according to
+OPTIONS:
+
+.RS
+.nf
+- %   start a format specification
+- %c  print a single character
+- %s  print a string of characters
+- %d  print a decimal (base 10) number
+- %i  print an integer in base 10
+.RE
+
+
+.SH RETURN VALUE
+
+.SH EXAMPLES
+Prueba
+
+.SH SEE ALSO
+
+.BR printf(3)
+
+.SH AUTHOR
+Written by Juan Pablo Gaviria and Juan Jose Carabali.
+.RS
+Github:
+.UR https://github.com/SrDri/printf
+.UE
+.RE
