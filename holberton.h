@@ -5,6 +5,19 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+/**
+ * struct _format - Struct for formats
+ *
+ * @n: The format
+ * @func: The function associated
+ * function pointer
+ */
+typedef struct _format
+{
+	char *n;
+	int (*func)();
+} _format;
+/* its int because number of arguments */
 int _putchar(char c);
 int _printf(const char *format, ...);
 int print_c(va_list print);
