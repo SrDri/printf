@@ -18,7 +18,7 @@ int print_c(va_list print)
 }
 
 /**
- * _print_string - prints the string, char by char
+ * print_s - prints the string, char by char
  * @print: list of arguments, va_list
  * Return: the number of printed chars, int
  */
