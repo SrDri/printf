@@ -7,14 +7,14 @@
 /**
  * print_i - print an integer and decimal
  * @print: list of arguments
- * Return: 
+ * Return: i int
  */
-int print_i(va_list arg)
+int print_i(va_list print)
 {
-	int a, i = 0, temp;
+	int a, i = 0, aux;
 	int factor = 1;
 
-	a = va_arg(arg, int);
+	a = va_arg(print, int);
 	if (a <= INT_MAX && a >= INT_MIN - 1)
 	{
 		if (a < 0)
@@ -23,11 +23,11 @@ int print_i(va_list arg)
 			_putchar('-');
 			i++;
 		}
-		temp = a;
+		aux = a;
 		i = 0;
-		while (temp)
+		while (aux)
 		{
-			temp = temp / 10;
+			aux = aux / 10;
 			factor = factor * 10;
 		}
 		while (factor > 1)
