@@ -9,7 +9,6 @@
  * @print: list of arguments
  * Return: 
  */
-<<<<<<< HEAD
 int print_i(va_list arg)
 {
 	int a, i = 0, temp;
@@ -44,8 +43,4 @@ int print_i(va_list arg)
 	{
 		return (-1);
 	}
-=======
-int print_i(va_list print)
-{
->>>>>>> 6e11183cfda9eb1f34b58d09c1b0ab7f6a9c217f
 }
