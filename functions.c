@@ -24,7 +24,7 @@ int print_c(va_list print)
  */
 int print_s(va_list print)
 {
-	size_t i;
+	unsigned int i;
 	char *str = va_arg(print, char *);
 
 	if (str == NULL)
