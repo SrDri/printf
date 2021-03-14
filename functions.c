@@ -13,6 +13,7 @@ int print_c(va_list print)
 	char c;
 
 	c = (char)va_arg(print, int);
+	/*casteo*/
 	_putchar(c);
 	return (1);
 }
