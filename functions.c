@@ -33,7 +33,7 @@ int print_s(va_list print)
 		str = "(null)";
 	}
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (i = 0; str[i]; i++)
 	{
 		_putchar(str[i]);
 	}

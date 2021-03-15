@@ -1,46 +1,82 @@
 #include "holberton.h"
-#include <unistd.h>
-#include <stdarg.h>
 #include <stdlib.h>
+
 /**
- * _printf - printf function
- * @format: is a %argument
- * Return: int number of arguments
+ * _structure - verify a specifier
+ * @format: format
+ * Return: valid function or NULL
+ */
+int (*_structure(const char *format))(va_list)
+{
+	size_t i;
+
+	_format sformat[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"d", print_i},
+		{"i", print_i},
+		{"%", Percent_sign},
+		{NULL, NULL}};
+
+	for (i = 0; sformat[i].n != NULL; i++)
+	{
+		if (*(sformat[i].n) == *format)
+		{
+			return (sformat[i].func);
+		}
+	}
+	return (NULL);
+}
+
+/**
+ * _printf - print function
+ * @format: format
+ * Return: num of chars
  */
 int _printf(const char *format, ...)
 {
-	int i, j;
-	int a = 0;
-	_format sformat[] = {
-		{"c", print_c},
-		{"i", print_i},
-		{"s", print_s},
-		{"d", print_i},
-		{"%", Percent_sign},
-		{NULL, NULL}};
-	va_list print;
-
-	va_start(print, format);
-	i = 0;
-	if (format == NULL)
-		return (-1);
-	while (format && format[i] != '\0')
+	if (format != NULL)
 	{
-		if (format[i] == '%')
+		size_t i = 0, j = 0;
+
+		va_list _print;
+
+		int (*f)(va_list);
+
+		va_start(_print, format);
+		while (format[i])
 		{
-			if (format[i + 1] == '\0')
-				return (-1);
-			j = 0;
-			while (sformat[j].n != '\0')
+			while (format[i] != '%' && format[i])
 			{
-				if (format[i] == sformat[j].n[0])
-				{
-				}
+				_putchar(format[i]);
+				i++;
+				j++;
 			}
+			if (!format[i])
+				return (j);
+			f = _structure(&format[i + 1]);
+
+			if (f != NULL)
+			{
+				j += f(_print);
+				i = i + 2;
+				continue;
+			}
+			if (!format[i + 1])
+				return (-1);
+
+			_putchar(format[i]);
+			j++;
+			if (format[i + 1] == '%')
+				i = i + 2;
+			else
+				i++;
 		}
-		j++;
-		i++;
+		va_end(_print);
+		return (j);
 	}
-	va_end(print);
-	return ();
+	else
+	{
+		return (-1);
+	}
 }
