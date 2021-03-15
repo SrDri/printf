@@ -1,24 +1,22 @@
 #include "holberton.h"
 #include <stdlib.h>
-
 /**
- * _structure - verify a specifier
+ * specifier - valid a specifier
  * @format: format
  * Return: valid function or NULL
  */
-int (*_structure(const char *format))(va_list)
+int (*specifier(const char *format))(va_list)
 {
-	size_t i;
+	unsigned int i;
 
 	_format sformat[] = {
 		{"c", print_c},
 		{"s", print_s},
 		{"d", print_i},
 		{"i", print_i},
-		{"%", Percent_sign},
 		{NULL, NULL}};
 
-	for (i = 0; sformat[i].n != NULL; i++)
+	for (i = 0; sformat[i].n != '\0'; i++)
 	{
 		if (*(sformat[i].n) == *format)
 		{
@@ -27,7 +25,6 @@ int (*_structure(const char *format))(va_list)
 	}
 	return (NULL);
 }
-
 /**
  * _printf - print function
  * @format: format
@@ -35,36 +32,40 @@ int (*_structure(const char *format))(va_list)
  */
 int _printf(const char *format, ...)
 {
-	if (format != NULL)
+	unsigned int i = 0;
+	unsigned int j = 0;
+	va_list _print;
+	int (*func)(va_list);
+
+	va_start(_print, format);
+	i = 0;
+	if (format == NULL)
+		return (-1);
+	while (format)
 	{
-		size_t i = 0, j = 0;
-
-		va_list _print;
-
-		int (*f)(va_list);
-
-		va_start(_print, format);
-		while (format[i])
+		while (format[i] && format[i] != '\0')
 		{
-			while (format[i] != '%' && format[i])
-			{
-				_putchar(format[i]);
-				i++;
-				j++;
-			}
-			if (!format[i])
-				return (j);
-			f = _structure(&format[i + 1]);
-
-			if (f != NULL)
-			{
-				j += f(_print);
-				i = i + 2;
-				continue;
-			}
-			if (!format[i + 1])
+			_putchar(format[i]);
+			i++;
+			j++;
+		}
+		if (format[i] == 0)
+			return (j);
+		/* se manda la direccion de i + 1 porque */
+		/* va despues del especificador % */
+		/* func es el puntero a la función de la estrecutura */
+		func = specifier(&format[i + 1]);
+		if (func != NULL)
+		{
+			/* se suma para sumar la lista */
+			j = j + func(_print);
+			/* se incrementa porque despues hay otro */
+			/* otro especifiador en el main */
+			i = i + 2;
+			continue;
+			/* necesita avanzar posiciones */
+			if (format[i + 1] == 0)
 				return (-1);
-
 			_putchar(format[i]);
 			j++;
 			if (format[i + 1] == '%')
@@ -72,11 +73,7 @@ int _printf(const char *format, ...)
 			else
 				i++;
 		}
-		va_end(_print);
-		return (j);
 	}
-	else
-	{
-		return (-1);
-	}
+	va_end(_print);
+	return (j);
 }

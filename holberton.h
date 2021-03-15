@@ -15,7 +15,7 @@
 typedef struct _format
 {
 	char *n;
-	int (*func)();
+	int (*func)(va_list);
 } _format;
 /* its int because number of arguments */
 int _putchar(char c);
