@@ -11,7 +11,7 @@
  */
 int print_i(va_list print)
 {
-	int a, expo = 1, len = 0;
+	int a, count = 1, len = 0;
 	unsigned int n;
 	char ar;
 
@@ -20,20 +20,20 @@ int print_i(va_list print)
 	if (a < 0)
 	{
 		ar = '-';
-		len = len + write(1, &ar, 1);
+		len = len + _putchar(ar);
 		n = a * -1;
 	}
 	else
 		n = a;
-	while (n / expo > 9)
-		expo *= 10;
+	while (n / count > 9)
+		count *= 10;
 
-	while (expo != 0)
+	while (count != 0)
 	{
-		ar = n / expo + '0';
-		len = len + write(1, &ar, 1);
-		n = n % expo;
-		expo = expo / 10;
+		ar = n / count + '0';
+		len = len + _putchar(ar);
+		n = n % count;
+		count = count / 10;
 	}
 	return (len);
 }
