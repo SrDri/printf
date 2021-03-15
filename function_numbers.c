@@ -7,40 +7,33 @@
 /**
  * print_i - print an integer and decimal
  * @print: list of arguments
- * Return: i int
+ * Return: i - len
  */
 int print_i(va_list print)
 {
-	int a, i = 0, aux;
-	int factor = 1;
+	int a, expo = 1, len = 0;
+	unsigned int n;
+	char ar;
 
 	a = va_arg(print, int);
-	if (a <= INT_MAX && a >= INT_MIN - 1)
+
+	if (a < 0)
 	{
-		if (a < 0)
-		{
-			a = a * (-1);
-			_putchar('-');
-			i++;
-		}
-		aux = a;
-		i = 0;
-		while (aux)
-		{
-			aux = aux / 10;
-			factor = factor * 10;
-		}
-		while (factor > 1)
-		{
-			factor = factor / 10;
-			_putchar((a / factor) + '0');
-			a = a % factor;
-			i++;
-		}
-		return (i);
+		ar = '-';
+		len = len + write(1, &ar, 1);
+		n = a * -1;
 	}
 	else
+		n = a;
+	while (n / expo > 9)
+		expo *= 10;
+
+	while (expo != 0)
 	{
-		return (-1);
+		ar = n / expo + '0';
+		len = len + write(1, &ar, 1);
+		n = n % expo;
+		expo = expo / 10;
 	}
+	return (len);
 }
