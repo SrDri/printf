@@ -18,12 +18,9 @@ int (*specifier(const char *format))(va_list)
 
 	for (i = 0; sformat[i].n != '\0'; i++)
 	{
-		for (j = 0; format[j]; j++)
+		if (*(sformat[i].n) == *format)
 		{
-			if (*(sformat[i].n) == format[j])
-			{
-				return (sformat[i].func);
-			}
+			return (sformat[i].func);
 		}
 	}
 	return (NULL);
