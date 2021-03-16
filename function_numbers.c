@@ -5,7 +5,7 @@
 
 /**
  * print_i - print an integer and decimal
- * @print: list of arguments
+ * @_print: list of arguments
  * Return: i - len
  */
 int print_i(va_list _print)
@@ -32,6 +32,11 @@ int print_i(va_list _print)
 	}
 	return (count);
 }
+/**
+ * cifras - numero de cifras
+ * @n: number
+ * Return: count
+ */
 int cifras(int n)
 {
 	int count = 1;
@@ -48,6 +53,12 @@ int cifras(int n)
 	}
 	return (count);
 }
+/**
+ * _pow - potentiation
+ * @x: num x
+ * @y: num y
+ * Return: function
+ */
 int _pow(int x, int y)
 {
 	if (y < 0)
