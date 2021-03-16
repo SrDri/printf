@@ -1,7 +1,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <limits.h>
 #include "holberton.h"
 
 /**
@@ -9,31 +8,55 @@
  * @print: list of arguments
  * Return: i - len
  */
-int print_i(va_list print)
+int print_i(va_list _print)
 {
-	int a, count = 1, len = 0;
-	unsigned int n;
-	char ar;
+	int n, aux, i;
+	int count = 0;
+	char arg;
 
-	a = va_arg(print, int);
+	n = va_arg(_print, int);
 
-	if (a < 0)
+	if (n < 0)
 	{
-		ar = '-';
-		len = len + _putchar(ar);
-		n = a * -1;
+		aux = -n;
+		write(1, "-", 1);
+		count++;
 	}
 	else
-		n = a;
-	while (n / count > 9)
-		count *= 10;
-
-	while (count != 0)
+		aux = n;
+	for (i = 1; i <= cifras(aux); i++)
 	{
-		ar = n / count + '0';
-		len = len + _putchar(ar);
-		n = n % count;
-		count = count / 10;
+		arg = ((aux / (_pow(10, cifras(aux) - i))) % 10) + 48;
+		write(1, &arg, 1);
+		count++;
 	}
-	return (len);
+	return (count);
+}
+int cifras(int n)
+{
+	int count = 1;
+	int control = 10;
+
+	if (n < 0)
+	{
+		n = -n;
+	}
+	while (control <= n)
+	{
+		count++;
+		control = control * 10;
+	}
+	return (count);
+}
+int _pow(int x, int y)
+{
+	if (y < 0)
+	{
+		return (-1);
+	}
+	else if (y == 0)
+	{
+		return (1);
+	}
+	return (x * _pow(x, y - 1));
 }

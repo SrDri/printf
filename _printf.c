@@ -32,48 +32,53 @@ int (*specifier(const char *format))(va_list)
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i = 0;
-	unsigned int j = 0;
-	va_list _print;
-	int (*func)(va_list);
-
-	va_start(_print, format);
-	i = 0;
-	if (format == NULL)
-		return (-1);
-	while (format)
+	if (format != NULL)
 	{
-		while (format[i] && format[i] != '\0')
+		unsigned int i = 0;
+		unsigned int j = 0;
+
+		va_list _print;
+
+		int (*func)(va_list);
+
+		va_start(_print, format);
+		while (format[i])
 		{
-			_putchar(format[i]);
-			i++;
-			j++;
-		}
-		if (format[i] == 0)
-			return (j);
-		/* se manda la direccion de i + 1 porque */
-		/* va despues del especificador % */
-		/* func es el puntero a la función de la estrecutura */
-		func = specifier(&format[i + 1]);
-		if (func != NULL)
-		{
-			/* se suma para sumar la lista */
-			j = j + func(_print);
-			/* se incrementa porque despues hay otro */
-			/* otro especifiador en el main */
-			i = i + 2;
-			continue;
-			/* necesita avanzar posiciones */
-			if (format[i + 1] == 0)
+			while (format[i] != '%' && format[i])
+			{
+				_putchar(format[i]);
+				i++;
+				j++;
+			}
+			if (format[i] == 0)
+				return (j);
+
+			func = specifier(&format[i + 1]);
+
+			if (func != NULL)
+			{
+				j += func(_print);
+				i = i + 2;
+				continue;
+			}
+
+			if (!format[i + 1])
 				return (-1);
+
 			_putchar(format[i]);
+
 			j++;
+
 			if (format[i + 1] == '%')
 				i = i + 2;
 			else
 				i++;
 		}
+		va_end(_print);
+		return (j);
 	}
-	va_end(_print);
-	return (j);
+	else
+	{
+		return (-1);
+	}
 }

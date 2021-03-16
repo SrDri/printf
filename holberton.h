@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <unistd.h>
 
 /**
  * struct _format - Struct for formats
@@ -24,5 +25,7 @@ int print_c(va_list print);
 int print_s(va_list print);
 int Percent_sign(__attribute__((unused)) va_list print);
 int print_i(va_list print);
+int cifras(int n);
+int _pow(int x, int y);
 
 #endif /* _HOLBERTON_H_ */
