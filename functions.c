@@ -10,11 +10,7 @@
  */
 int print_c(va_list _print)
 {
-	char c;
-
-	c = (char)va_arg(_print, int);
-	/*casteo*/
-	_putchar(c);
+	_putchar(va_arg(_print, int));
 	return (1);
 }
 
