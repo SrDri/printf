@@ -48,3 +48,6 @@ Based on the ["Secrets of printf"](http://www.cypress.com/file/54761/download) s
   - Make a symbolic link to the `test/main.c` file to the root of the project: `ln -s test/main.c .`
   - Compile project with `-Wno-format` extra flag: `gcc -Wall -Werror -Wextra -pedantic -Wno-format *.c`
   - Do not push any `.c` file containting a main function in the root directory of the project
+
+# Examples
+- %d 
